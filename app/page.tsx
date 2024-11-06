@@ -142,7 +142,8 @@ export default function Home() {
   );
 }
 
-const styles = {
+// Explicitly type `styles` using React.CSSProperties
+const styles: { [key: string]: React.CSSProperties } = {
   container: {
     maxWidth: '600px',
     margin: '20px auto',
@@ -205,4 +206,5 @@ const styles = {
     alignSelf: 'center',
   },
 };
+
 
