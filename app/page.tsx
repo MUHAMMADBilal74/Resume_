@@ -1,9 +1,20 @@
 "use client"
-import { useState } from 'react';
+
+
+import { useState, ChangeEvent, FormEvent } from 'react';
 import Image from 'next/image';
 
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  education: string;
+  address: string;
+  profilePic: File | null;
+}
+
 export default function Home() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     phone: '',
@@ -12,16 +23,17 @@ export default function Home() {
     profilePic: null,
   });
 
-  const handleChange = (e:any) => {
+  // Replace `any` with appropriate event types
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = e.target;
-    if (name === 'profilePic') {
+    if (name === 'profilePic' && files) {
       setFormData({ ...formData, profilePic: files[0] });
     } else {
       setFormData({ ...formData, [name]: value });
     }
   };
 
-  const handleSubmit = (e:any) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
     setFormData({
